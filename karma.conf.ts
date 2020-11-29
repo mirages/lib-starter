@@ -1,7 +1,39 @@
 // Karma configuration
 // Generated on Sat Nov 07 2020 21:05:42 GMT+0800 (GMT+08:00)
+import type { Config, ConfigOptions } from 'karma'
+import type { KarmaTypescriptConfig } from 'karma-typescript'
 
-module.exports = function (config) {
+const karmaTypescriptConfig: KarmaTypescriptConfig = {
+  tsconfig: './tsconfig.json',
+  compilerOptions: {
+    // module: 'umd',
+    target: 'es5',
+    noEmit: false, // 必须输出 js 文件
+    sourceMap: true // 覆盖率测试报告需要
+  },
+  include: ['test/**/*'],
+  reports: {
+    html: {
+      directory: 'coverage',
+      subdirectory: 'html'
+    },
+    json: {
+      directory: 'coverage',
+      subdirectory: 'json',
+      filename: 'coverage.json'
+    },
+    lcovonly: {
+      directory: 'coverage',
+      subdirectory: 'lcovonly',
+      filename: 'coverage.txt'
+    },
+    // 在控制台中输出测试报告概要，===== Coverage summary =====
+    'text-summary': ''
+  }
+}
+
+// need to export a function as commonjs
+export = function (config: Config) {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -22,34 +54,7 @@ module.exports = function (config) {
       '**/*.ts': ['karma-typescript'] // karma-typescript 预处理器，将 ts 转换成 js
     },
 
-    karmaTypescriptConfig: {
-      tsconfig: './tsconfig.json',
-      compilerOptions: {
-        // module: 'umd',
-        target: 'es5',
-        noEmit: false, // 必须输出 js 文件
-        sourceMap: true // 覆盖率测试报告需要
-      },
-      include: ['test/**/*'],
-      reports: {
-        html: {
-          directory: 'coverage',
-          subdirectory: 'html'
-        },
-        json: {
-          directory: 'coverage',
-          subdirectory: 'json',
-          filename: 'coverage.json'
-        },
-        lcovonly: {
-          directory: 'coverage',
-          subdirectory: 'lcovonly',
-          filename: 'coverage.txt'
-        },
-        // 在控制台中输出测试报告概要，===== Coverage summary =====
-        'text-summary': null
-      }
-    },
+    karmaTypescriptConfig,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -109,5 +114,5 @@ module.exports = function (config) {
       'karma-typescript',
       'karma-chrome-launcher'
     ]
-  })
+  } as ConfigOptions)
 }

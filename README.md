@@ -53,15 +53,17 @@
 
 `karma` 是一个 `test runner`。
 
-- `karma-mocha` - `karma` 适配器插件，用于适配 `mocha` 测试框架。需要在 `karma.conf.js` 中配置 `client.mocha` 选项进行相关配置。
-
+- `karma-mocha` - `karma` 适配器插件，用于适配 `mocha` 测试框架。需要在 `karma.conf.ts` 中配置 `client.mocha` 选项进行相关配置。
 - `karma-mocha-reporter` - `karma` 测试报告插件，用于在控制台中生成 `mocha` 风格的测试报告。需要在 `karma.conf.js` 中配置 `mochaReporter` 选项进行相关配置。
-
 - `karma-chai` - `karma` 适配器插件，用于适配 `chai` 断言库。可以在测试用例中直接使用 `chai.expect` 和 `chai.assert` 以及 `should` 断言，而不需要在每个测试文件中单独 `import` 引入。
-
-- `karma-typescript` - `karma` 预处理器插件，用于将 `ts` 转换成 `js` 。需要在 `karma.conf.js` 中配置 `karmaTypescriptConfig` 选项进行相关配置。
-
+- `karma-typescript` - `karma` 预处理器插件，用于将 `ts` 转换成 `js` 。需要在 `karma.conf.ts` 中配置 `karmaTypescriptConfig` 选项进行相关配置。
 - `karma-chrome-launcher` - `karma` 浏览器插件，用于启动本地的 `chrome` 浏览器或者 `ChromeHeadless` 浏览器执行测试用例。
+
+注意：`karma.conf.ts` 文件需要使用 `export =` 导出 `function` 配置。因为 `karma cli` 只能导入 `CommonJS` 模块。
+
+## ts-node
+
+用于在 `Node` 环境中直接执行 `ts` 文件。在执行 `karma start` 命令时自动加载并执行 `karma.conf.ts` 文件。
 
 ## husky
 
